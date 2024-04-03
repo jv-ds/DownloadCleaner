@@ -2,8 +2,6 @@ import os
 import sys
 import time
 import logging
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 import shutil
 
 source_dir = "/Users/jeevan/Downloads"
