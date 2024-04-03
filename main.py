@@ -23,6 +23,10 @@ def move_files():
         if file.name.endswith('.pdf') or file.name.endswith('.docx'):
             dest = dl_files
             shutil.move(file.path, dest)
+        if file.name.endswith('.png') or file.name.endswith('.jpeg'):
+            dest = dl_images
+            shutil.move(file.path, dest)
+        
 
 
 if __name__ == "__main__":
