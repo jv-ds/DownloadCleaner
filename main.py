@@ -22,19 +22,19 @@ doc_names = [".doc", ".docx", ".odt", ".pdf", ".xls", ".xlsx", ".ppt", ".pptx"]
 
 def move_files():
     for file in os.scandir(source_dir):
-        if file.name.endswith('.wav') or file.name.endswith('.mp3'):
+        if file.name.endswith(tuple(sound_names)):
             dest = dl_sounds
             shutil.move(file.path, dest)
-        if file.name.endswith('.mov') or file.name.endswith('.mp4'):
+        elif file.name.endswith(tuple(video_names)):
             dest = dl_videos
             shutil.move(file.path, dest)
-        if file.name.endswith('.pdf') or file.name.endswith('.docx'):
+        elif file.name.endswith(tuple(doc_names)):
             if file.name.startswith('CamScanner'):
                 dest = dl_scans
                 shutil.move(file.path, dest)
             dest = dl_files
             shutil.move(file.path, dest)
-        if file.name.endswith('.png') or file.name.endswith('.jpeg'):
+        elif file.name.endswith(tuple(image_names)):
             dest = dl_images
             shutil.move(file.path, dest)
         
