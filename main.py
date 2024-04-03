@@ -20,6 +20,9 @@ def move_files():
         if file.name.endswith('.wav') or file.name.endswith('.mp3'):
             dest = dl_sounds
             shutil.move(file.path, dest)
+        if file.name.endswith('.pdf') or file.name.endswith('.docx'):
+            dest = dl_files
+            shutil.move(file.path, dest)
 
 
 if __name__ == "__main__":
