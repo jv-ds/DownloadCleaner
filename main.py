@@ -24,6 +24,9 @@ def move_files():
             dest = dl_videos
             shutil.move(file.path, dest)
         if file.name.endswith('.pdf') or file.name.endswith('.docx'):
+            if file.name.startswith('CamScanner'):
+                dest = dl_scans
+                shutil.move(file.path, dest)
             dest = dl_files
             shutil.move(file.path, dest)
         if file.name.endswith('.png') or file.name.endswith('.jpeg'):
