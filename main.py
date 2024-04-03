@@ -3,31 +3,27 @@ import sys
 import time
 import logging
 from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler
+from watchdog.events import FileSystemEventHandler
+import shutil
 
 source_dir = "/Users/jeevan/Downloads"
+#Destination Files
+dl_files = "/Users/jeevan/Downloads/Downloaded Files"
+dl_images = "/Users/jeevan/Downloads/Downloaded Images"
+dl_scans = "/Users/jeevan/Downloads/Downloaded Scans"
+dl_videos = "/Users/jeevan/Downloads/Downloaded Videos"
+dl_sounds = "/Users/jeevan/Downloads/Downloaded Sounds"
 
-#Print filenames for files in Downloads folder
-def print_filenames(folder):
-    for file in folder:
-        print(file.name)
 
+def move_files():
+    for file in os.scandir(source_dir):
+        if file.name.endswith('.wav') or file.name.endswith('.mp3'):
+            dest = dl_sounds
+            shutil.move(file.path, dest)
 
-print_filenames(os.scandir(source_dir))
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
-    path = source_dir       # to track Downloads folder
-    logging.info(f'start watching directory {path!r}')
-    event_handler = LoggingEventHandler()       #should change to function later
-    observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
-    observer.start()
-    try:
-        while True:
-            time.sleep(1)
-    finally:
-        observer.stop()
-        observer.join()
+    move_files()
